@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+
+        @keyframes pulseAnimation {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .dev-info-btn {
+            animation: pulseAnimation 2s infinite;
+        }
+
+        .dev-info-btn {
+            animation: pulseAnimation 2s infinite;
+            background-color: #914EA7; /* Green background */
+            border: 2px solid #fff; /* White border */
+            color: white; /* White text */
+        }
+
+
+        .container {
+            max-width: 800px;
+            padding: 20px;
+            margin-top: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-control {
+            border-radius: 5px;
+        }
+        .btn-primary {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Login</h2>
+                <form action="/login" method="post" class="mb-4">
+                    <div class="form-group">
+                        <input type="text" name="username" class="form-control" placeholder="Roll Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" class="form-control" placeholder="Password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </form>
+
+            </div>
+            <div class="col-md-6">
+                <h2>Register</h2>
+                <form action="/register" method="post">
+                    <div class="form-group">
+                        <input type="text" name="roll_number" class="form-control" placeholder="Roll Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="name" class="form-control" placeholder="Full Name" required>
+                    </div>
+                    <div class="form-group">
+                        <select name="branch" class="form-control">
+                            <option value="c1">C1</option>
+            <option value="c2">C2</option>
+            <option value="c3">C3</option>
+            <option value="c4">C4</option>
+            <option value="c5">C5</option>
+            <option value="IT1">IT1</option>
+            <option value="IT2">IT2</option>
+            <option value="IT3">IT3</option>
+            <option value="AI and Ds">AI and Ds</option>
+            <option value="Mech 1">Mech 1</option>
+            <option value="Mech 2">Mech 2</option>
+            <option value="Civil 1">Civil 1</option>
+            <option value="Civil 2">Civil 2</option>
+            <option value="E1">E1</option>
+            <option value="E2">E2</option>
+            <option value="E3">E3</option>
+            <option value="EEE1">EEE1</option>
+            <option value="EE2">EE2</option>
+            <option value="Bio Tech">Bio Tech</option>
+            <option value="M.Tech">M.Tech</option>
+            <option value="MBA">MBA</option>
+            <option value="Chemical">Chemical</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="phone_number" class="form-control" placeholder="Phone Number" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email_id" class="form-control" placeholder="Email ID" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="official_email_id" class="form-control" placeholder="Official Email ID" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </form>
+                <a href="/dev.html" class="btn btn-secondary dev-info-btn">Developer Info</a>
+                <a href="/admin.html" class="btn btn-secondary dev-info-btn">Admin</a>
+
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>

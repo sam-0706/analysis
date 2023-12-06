@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Company Selection</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Add your custom styles here */
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .card {
+            width: 190px;
+            height: 100px;
+            border-radius: 30px;
+            background: #e0e0e0;
+            box-shadow: 15px 15px 30px #bebebe,
+                        -15px -15px 30px #ffffff;
+            padding: 20px;
+            margin: 10px;
+            transition: box-shadow 0.3s ease-in-out;
+            position: relative;
+        }
+        .card:hover {
+            box-shadow: 20px 20px 40px #bebebe,
+                        -20px -20px 40px #ffffff;
+        }
+        .apply-button {
+            display: none;
+            text-align: center;
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .card:hover .apply-button {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        {% for company in companies %}
+        <div class="card">
+            <h3>{{ company }}</h3>
+            <button class="apply-button" onclick="submitRollNumber('{{ company }}')">Apply</button>
+        </div>
+        {% endfor %}
+    </div>
+    <script>
+        function submitRollNumber(companyName) {
+            // Fetch user details based on Roll Number
+            var rollNumber = "{{ roll_number }}";  // Get the user's Roll Number
+            var userDetails = getUserDetails(rollNumber);
+
+            // Check if userDetails is empty
+            if (!userDetails) {
+                alert("User details not found.");
+                return false;
+            }
+
+            // Send all user details and company name to the server
+            $.post('/companies/{{ roll_number }}/{{ company_type }}',
+                {
+                    company_name: companyName,
+                    ...userDetails  // Pass all user details
+                },
+                function(response) {
+                    if (response === 'added') {
+                        alert("Your application has been considered");
+                    } else if (response === 'exists') {
+                        alert("It already exists");
+                    }
+                });
+            return false; // Prevent form from submitting in the traditional way
+        }
+
+        function getUserDetails(rollNumber) {
+            // Function to fetch user details from the server based on Roll Number
+            var userDetails = null;  // Placeholder for user details
+
+            // Make an AJAX request to fetch user details
+            $.ajax({
+                type: "GET",
+                url: '/get_user_details/' + rollNumber,
+                async: false,  // Synchronous request
+                success: function(data) {
+                    userDetails = data;  // Assign fetched user details to userDetails
+                }
+            });
+
+            return userDetails;
+        }
+    </script>
+
+
+
+</body>
+</html>

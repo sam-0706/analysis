@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Company Data</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ url_for('serve_static', filename='bootstrap.min.css') }}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Download Company Data</h2>
+        <h3>Company Options</h3>
+        <ul>
+            <li>
+                <a href="{{ url_for('display_directory_contents', directory_type='IT_Companies') }}" class="btn btn-link">
+                    IT Companies
+                </a>
+            </li>
+            <li>
+                <a href="{{ url_for('display_directory_contents', directory_type='Non-IT_Companies') }}" class="btn btn-link">
+                    Non-IT Companies
+                </a>
+            </li>
+        </ul>
+
+        <!-- This will display the contents of the selected directory -->
+        {% block directory_contents %}
+        {% endblock %}
+    </div>
+</body>
+</html>
